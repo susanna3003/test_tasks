@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<body>
+<link rel="stylesheet" href="style.css">
+
+<h1>My Reminders</h1>
+<p>This is where user reminders will be listed. It looks like your reminders are empty right now!</p>
+
+<button id="createReminderButton" onclick="openModal()">Create Reminder</button>
+
+<div id="reminderCreateForm" class="popup">
+      <form class="popup-content" id="myForm">
+        <span class="close">&times;</span>
+        <h2>Reminder Creation</h2>
+
+        <!--- reminder name --->
+        <label for="reminderName">Reminder name: </label>
+        <input type="text" id="reminderName" placeholder="Reminder Name" required><br>
+
+        <br>
+      <!--- reminder date --->
+        <label for="dateDue">Date due: </label>
+        <input type="date" id="dateDue" name="datePicker" required><br>
+
+        <br>
+        <!--- optional --->
+        <h3>Optional:</h3>
+
+        <!--- reminder location --->
+        <label for="reminderLocation">Add a location: </label>
+        <input type="text" id="reminderLocation" placeholder="Location"><br>
+
+        <!--- reminder invites --->
+        <label for="reminderInvite">Task invites: </label>
+        <input type="text" id="reminderInvite" placeholder="Reminder Invite"><br>
+
+        <!--- reminder recurring --->
+        <label for="reminderRecurr">Recurring: </label>
+        <select id="reminderRecurr" name="reminderRecurr">
+          <option value="choose">Recurring? Y/N</option>
+          <option value="yes">YES</option>
+          <option value="no">NO</option>
+        </select><br>
+
+        <br>
+        <button type="submit">Submit</button>
+      </form>
+</div>
+
+<div>
+  <br>
+  <p id="rcorners1">{{reminderName}}</p>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+  // Get the button element
+  var createReminderButton = document.getElementById("createReminderButton");
+
+  // Get the modal element
+  var modal = document.getElementById("reminderCreateForm");
+
+  // Get the close button element inside the modal
+  var closeButton = modal.querySelector(".close");
+
+  // Function to open the modal when the button is clicked
+  createReminderButton.addEventListener("click", function() {
+    modal.style.display = "block";
+  });
+
+  // Function to close the modal when the close button is clicked
+  closeButton.addEventListener("click", function() {
+    modal.style.display = "none";
+  });
+</script>
+
+<script>
+  function validateForm() {
+    // Get the value of the due date input
+    var dueDateInput = document.getElementById('dateDue').value;
+
+    // Get the current date
+    var currentDate = new Date().toISOString().slice(0, 10);
+
+    // Compare due date with current date
+    if (dueDateInput <= currentDate) {
+      // Display error message
+      alert('Please enter a due date in the future.');
+      return false; // Prevent form submission
+    }
+
+    return true; // Allow form submission
+  }
+</script>
+
+</body>
+</html>
